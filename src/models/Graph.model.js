@@ -1,11 +1,11 @@
 import { types } from "mobx-state-tree"
 
-import Node  from "./Node.model"
+import Node from "./Node.model"
 import Edge from "./Edge.model"
 
 
 const Graph = types
-    .model( "Graph", {
+    .model("Graph", {
         id: types.identifier,
         nodes: types.map(types.late(() => Node)),
         edges: types.map(types.late(() => Edge))
@@ -32,7 +32,7 @@ const Graph = types
             target.connectFrom(source)
         },
         // Function that generates phantom data for testing. This is a naive unoptimized generator.   
-        createPhantomData(N=100, E=300) {
+        createPhantomData(N = 100, E = 300) {
 
             // Generate an array of N nodes
             const nodes = Array.from(Array(N), (x, i) => i + 1);
@@ -45,8 +45,8 @@ const Graph = types
                 ]
 
                 self.addNode({
-                    id: "" + n,
-                    label: "" + n,
+                    id: "n" + n,
+                    label: "n" + n,
                     position: pos,
                 })
             }
@@ -54,11 +54,11 @@ const Graph = types
             // Create E numbers of edges
             [...Array(E)].forEach(() => {
                 // pick random node
-                const rn_source = nodes[Math.floor(Math.random() * nodes.length)]
+                const rn_source = "n" + nodes[Math.floor(Math.random() * nodes.length)]
 
                 // Helper function that picks a random Node to connect to
                 function dedup(source_node) {
-                    const n = nodes[Math.floor(Math.random() * nodes.length)];
+                    const n = "n" + nodes[Math.floor(Math.random() * nodes.length)];
                     if (n !== source_node) {
                         return (n)
                     } else {

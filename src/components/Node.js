@@ -1,37 +1,40 @@
-import React, { useRef, useState, useEffect, useMemo } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Html } from "drei"
-import * as THREE from "three"
+import { Vector3 } from "three"
 import { observer } from "mobx-react-lite"
 
 import Logo from "./Logo"
 import { useGraph } from "../stores/Graph.store"
 
 
-const Node = ({ node }) => {
-    const nodeRef = useRef()
-    const trollol = useGraph()
-
+const Node = ({ id }) => {
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
     const [visible, setVisible] = useState(true)
+    const nodeRef = useRef()
 
-    console.log(trollol)
+    const graph = useGraph()
+    const node = graph.nodes.get(id)
 
+    useEffect(() => {
+        console.log("Node: ", node.id, node.position.slice())
+    }, [node.position])
 
-
-    const pos = useMemo(() => new THREE.Vector3(...node.position.slice()),
-        [node.position])
 
     return (
         <sprite
             ref={nodeRef}
             key={node.id}
-            position={pos}
+            position={new Vector3(...node.position.slice())}
             onClick={e => {
                 e.stopPropagation()
-                setActive(!active)
-                setVisible(!visible)
-                // node.movePosition([1, 2, 3])
+                // setActive(!active)
+                // setVisible(!visible)
+                node.movePosition([
+                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1),
+                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1),
+                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1)
+                ])
                 //console.log(node.position)
             }}
             onPointerOver={e => {
@@ -71,4 +74,4 @@ const Node = ({ node }) => {
         </sprite>)
 }
 
-export default Node
+export default observer(Node)

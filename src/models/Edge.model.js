@@ -14,7 +14,7 @@ const Edge = types
     .views(self => ({
         // Function to get the position of an edge
         get position() {
-            return [self.source.position, self.target.position]
+            return [self.source.position.slice(), self.target.position.slice()]
         }
     }))
 

@@ -9,6 +9,8 @@ let initialState = Graph.create({
     edges: {},
 })
 
+
+/*
 const data = localStorage.getItem("graphState")
 
 if (data) {
@@ -19,7 +21,9 @@ if (data) {
 } else {
     initialState.createPhantomData()
 }
+*/
 
+initialState.createPhantomData(10, 30)
 export const GraphStore = initialState
 
 onSnapshot(GraphStore, snapshot => {

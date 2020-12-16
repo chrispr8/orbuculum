@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react"
-import { Canvas, extend, useFrame, useThree } from "react-three-fiber"
+import React, { useRef } from "react"
+import { Canvas } from "react-three-fiber"
 import { OrbitControls, Stats } from "drei"
 import { values } from "mobx"
 import { observer } from "mobx-react-lite"
 
 import Edge from "./Edge"
 import Node from "./Node"
-import { useGraph } from "../stores/Graph.store"
+import { GraphProvider, useGraph } from "../stores/Graph.store"
+
 
 
 function Graph(props) {
@@ -29,27 +30,27 @@ function Graph(props) {
             />
             <Stats />
             <scene ref={graphRef}>
-                {values(graph.nodes).map(n => {
-                    return (
-                        <Node
-                            key={n.id}
-                            node={n}
-                        />
-                    )
-                })}
-                {values(graph.edges).map(e => {
-                    return (
-                        <Edge
-                            key={e.id}
-                            id={e.id}
-                            source={e.source}
-                            target={e.target}
-                        />
-                    )
-                })}
+                <GraphProvider value={graph}>
+                    {values(graph.nodes).map(n => {
+                        return (
+                            <Node
+                                key={n.id}
+                                id={n.id}
+                            />
+                        )
+                    })}
+                    {values(graph.edges).map(e => {
+                        return (
+                            <Edge
+                                key={e.id}
+                                id={e.id}
+                            />
+                        )
+                    })}
+                </GraphProvider>
             </scene>
         </Canvas>
     )
 }
 
-export default Graph
+export default observer(Graph)

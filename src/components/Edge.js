@@ -1,20 +1,23 @@
-import React, { useMemo, useState, useRef, useEffect } from "react"
+import React, { useEffect } from "react"
 import { Vector3 } from "three"
-//import useGraph from './useGraph'
+import { observer } from "mobx-react-lite"
+
+import { useGraph } from "../stores/Graph.store"
 
 
+function Edge({ id }) {
+    const graph = useGraph()
+    const edge = graph.edges.get(id)
 
+    useEffect(() => {
+        console.log("Edge:", edge.id, edge.position)
+    }, [edge.position])
 
-function Edge(props) {
-    const vertices = useMemo(() =>
-        [props.source.position, props.target.position]
-            .map((v) => new Vector3(...v)),
-        [props.source, props.target])
     return (
         <line>
             <geometry
                 attach={"geometry"}
-                vertices={vertices}
+                vertices={edge.position.map((v) => new Vector3(...v))}
             />
             <lineBasicMaterial
                 attach={"material"}
@@ -27,4 +30,4 @@ function Edge(props) {
     )
 }
 
-export default Edge
+export default observer(Edge)
