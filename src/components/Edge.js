@@ -18,6 +18,7 @@ function Edge({ id }) {
             <geometry
                 attach={"geometry"}
                 vertices={edge.position.map((v) => new Vector3(...v))}
+                onUpdate={self => self.verticesNeedUpdate = true}
             />
             <lineBasicMaterial
                 attach={"material"}
