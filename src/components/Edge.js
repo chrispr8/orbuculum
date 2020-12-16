@@ -6,8 +6,6 @@ import { useGraph } from "../stores/Graph.store"
 
 
 function Edge({ id }) {
-    const [hovered, setHover] = useState(false)
-
     const graph = useGraph()
     const edge = graph.edges.get(id)
 
@@ -16,14 +14,7 @@ function Edge({ id }) {
     }, [edge.position])
 
     return (
-        <line
-            onPointerOver={e => {
-                e.stopPropagation()
-                setHover(true)
-            }}
-            onPointerOut={e => {
-                setHover(false)
-            }}>
+        <line>
             <geometry
                 attach={"geometry"}
                 vertices={edge.position.map((v) => new Vector3(...v))}
@@ -32,7 +23,7 @@ function Edge({ id }) {
             <lineBasicMaterial
                 attach={"material"}
                 color={0x232323}
-                linewidth={hovered ? 2 : 1}
+                linewidth={1}
                 transparent={true}
                 opacity={0.8}
             />
