@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Vector3 } from "three"
 import { observer } from "mobx-react-lite"
 
@@ -6,6 +6,8 @@ import { useGraph } from "../stores/Graph.store"
 
 
 function Edge({ id }) {
+    const [hovered, setHover] = useState(false)
+
     const graph = useGraph()
     const edge = graph.edges.get(id)
 
@@ -14,7 +16,14 @@ function Edge({ id }) {
     }, [edge.position])
 
     return (
-        <line>
+        <line
+            onPointerOver={e => {
+                e.stopPropagation()
+                setHover(true)
+            }}
+            onPointerOut={e => {
+                setHover(false)
+            }}>
             <geometry
                 attach={"geometry"}
                 vertices={edge.position.map((v) => new Vector3(...v))}
@@ -23,7 +32,7 @@ function Edge({ id }) {
             <lineBasicMaterial
                 attach={"material"}
                 color={0x232323}
-                linewidth={1}
+                linewidth={hovered ? 2 : 1}
                 transparent={true}
                 opacity={0.8}
             />
