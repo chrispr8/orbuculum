@@ -22,13 +22,13 @@ const Node = ({ id }) => {
 
 
     return (
-        <sprite
+        <mesh
             ref={nodeRef}
             key={node.id}
             position={new Vector3(...node.position.slice())}
             onClick={e => {
                 e.stopPropagation()
-                // setActive(!active)
+                setActive(!active)
                 // setVisible(!visible)
                 node.movePosition([
                     Math.random() * 10 * (Math.round(Math.random()) * 2 - 1),
@@ -44,14 +44,14 @@ const Node = ({ id }) => {
             onPointerOut={e => {
                 setHover(false)
             }}
-            scale={active ? [2, 2] : [1, 1]}
+            scale={active ? [3, 3, 3] : [1, 1, 1]}
             visible={visible}
         >
-            <circleBufferGeometry
+            <sphereBufferGeometry
                 attach={"geometry"}
-                args={[1, 32]}
+                args={[1, 256, 256]}
             />
-            <spriteMaterial
+            <meshNormalMaterial
                 attach={"material"}
                 color={active ?
                     hovered ? "orange" : "hotpink" :
@@ -59,19 +59,21 @@ const Node = ({ id }) => {
                 transparent={true}
                 opacity={0.8}
             />
-            { active ?
-                <Html
-                    scaleFactor={10}
-                    center
-                    visible={false}
-                >
-                    <Logo />
-                    <div className="content">
-                        Hello World <br />
-                        {node.id}
-                    </div>
-                </Html> : null}
-        </sprite>)
+            {
+                active ?
+                    <Html
+                        scaleFactor={10}
+                        center
+                        visible={false}
+                    >
+                        <Logo />
+                        <div className="content">
+                            Hello World <br />
+                            {node.id}
+                        </div>
+                    </Html> : null
+            }
+        </mesh >)
 }
 
 export default observer(Node)

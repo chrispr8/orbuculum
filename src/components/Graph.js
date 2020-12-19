@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { Canvas } from "react-three-fiber"
-import { OrbitControls, Stats } from "drei"
+import { OrbitControls, Stats, Stars } from "drei"
 import { values } from "mobx"
 import { observer } from "mobx-react-lite"
 
@@ -28,6 +28,7 @@ function Graph(props) {
                 enableDamping={true}
                 dampingFactor={0.3}
             />
+            <Stars />
             <Stats />
             <scene ref={graphRef}>
                 <GraphProvider value={graph}>
