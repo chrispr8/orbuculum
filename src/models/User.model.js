@@ -1,30 +1,41 @@
-import { types } from "mobx-state-tree"
-import { Vector3 } from "three"
+import { types, flow } from "mobx-state-tree"
 
-const Node = types
-    .model("Node", {
+import { Graph } from "./models/Graph"
+import { validateEmail } from "../utils/validator"
+import { graphFetcher } from "../data/graphFetcher"
+
+const User = types
+    .model("User", {
         id: types.identifier,
-        label: types.string,
-        position: types.array(types.number),
-        to: types.map(types.reference(types.late(() => Node))),
-        from: types.map(types.reference(types.late(() => Node))),
-        data: types.optional(types.string, ""),
+        name: types.string,
+        email: types.refinement("Email", types.string, value => validateEmail(value)),
+        authtoken: types.string,
+        graphs: types.map(types.reference(types.late(() => Graph))),
+        state: types.enumeration("State", ["pending", "done", "error"])
     })
-    .actions(self => ({
-        connectTo(node) {
-            self.to.put(node)
-        },
-        connectFrom(node) {
-            self.from.put(node)
-        },
-        movePosition(pos) {
-            self.position = pos
+    .views(self => ({
+        get name() {
+            return self.name
         }
     }))
-    .views(self => ({
-        get pos() {
-            return new Vector3(self.position)
-        },
+    .actions(self => ({
+        fetchGraphs: flow(function* fetchGraphs() {
+            try {
+                self.graphs = yield graphFetcher(self.id)
+            } catch (error) {
+                console.log("Failed retrival.", error)
+                self.state = "error"
+            }
+        }),
+        createGraph(graph) {
+            if (graph) {
+                const G = Graph.create(graph)
+                return self.graphs.put(G)
+            } else {
+                const G = Graph.create()
+                return self.graphs.put(G)
+            }
+        }
     }))
 
-export default Node    
+export default User
