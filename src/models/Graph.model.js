@@ -10,6 +10,11 @@ const Graph = types
         nodes: types.map(types.late(() => Node)),
         edges: types.map(types.late(() => Edge))
     })
+    .views(self => ({
+        get adjacencyMatrix() {
+            // TODO!
+        }
+    }))
     .actions(self => ({
         // Function to insert a node
         addNode(node) {
