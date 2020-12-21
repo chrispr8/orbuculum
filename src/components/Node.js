@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite"
 
 import Logo from "./Logo"
 import { useGraph } from "../stores/Graph.store"
+import CanvasCard from "./CanvasCard"
 
 
 const Node = ({ id }) => {
@@ -44,7 +45,7 @@ const Node = ({ id }) => {
             onPointerOut={e => {
                 setHover(false)
             }}
-            scale={active ? [3, 3, 3] : [1, 1, 1]}
+            scale={active ? [0.6, 0.6, 0.6] : [1, 1, 1]}
             visible={visible}
         >
             <sphereBufferGeometry
@@ -62,14 +63,21 @@ const Node = ({ id }) => {
             {
                 active ?
                     <Html
-                        scaleFactor={10}
+                        scaleFactor={100}
                         center
-                        visible={false}
+                        visible={true}
                     >
-                        <Logo />
-                        <div className="content">
-                            Hello World <br />
-                            {node.id}
+                        <div
+                            className="content"
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                setActive(!active)
+                            }}
+                        >
+                            <CanvasCard
+                                title="Hello World"
+                                description={"I am node #" + node.id + "!"}
+                            />
                         </div>
                     </Html> : null
             }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Vector3 } from "three"
 import { observer } from "mobx-react-lite"
 
@@ -11,7 +11,7 @@ function Edge({ id }) {
 
     useEffect(() => {
         console.log("Edge:", edge.id, edge.position)
-    }, [edge.position])
+    }, [edge.id, edge.position])
 
     return (
         <line>
