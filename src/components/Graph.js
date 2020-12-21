@@ -29,7 +29,6 @@ function Graph(props) {
                 dampingFactor={0.3}
             />
             <Stars />
-            <Stats />
             <scene ref={graphRef}>
                 <GraphProvider value={graph}>
                     {values(graph.nodes).map(n => {
