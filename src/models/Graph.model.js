@@ -13,6 +13,7 @@ const Graph = types
     .views(self => ({
         get adjacencyMatrix() {
             // TODO!
+            return self.nodes
         }
     }))
     .actions(self => ({

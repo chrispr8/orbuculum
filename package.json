@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@elastic/datemath": "^5.0.3",
+    "@elastic/eui": "^31.0.0",
+    "@terminusdb/terminusdb-client": "^4.1.0",
+    "@terminusdb/terminusdb-react-components": "^4.1.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
@@ -15,6 +19,7 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
     "react-three-fiber": "^5.3.10",
+    "swr": "^0.3.10",
     "three": "^0.123.0",
     "web-vitals": "^0.2.4"
   },
