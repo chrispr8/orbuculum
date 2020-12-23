@@ -1,3 +1,4 @@
+import { values } from "mobx"
 import { types } from "mobx-state-tree"
 
 import Node from "./Node.model"
@@ -11,9 +12,44 @@ const Graph = types
         edges: types.map(types.late(() => Edge))
     })
     .views(self => ({
+        // node count
+        get N() {
+            return values(self.nodes).length
+        },
+        // edge count
+        get E() {
+            return values(self.edges).length
+        },
+        get nodePositions() {
+            return values(self.nodes).map(n => values(n.position))
+        },
         get adjacencyMatrix() {
-            // TODO!
-            return self.nodes
+            const nodes = values(self.nodes)
+            const node_ids = values(self.nodes).map(n => n.id)
+            const adjm = nodes.map(n => {
+                const neighbours = [].concat(values(n.to).map(n => n.id), values(n.from).map(n => n.id))
+                return node_ids.map(nid => (neighbours.includes(nid)))
+            })
+            return adjm
+        },
+        get directedAdjacencyMatrix() {
+
+            // TODO: Implement directedAdjacencyMatrix
+            const [inm, outm] = [
+                values(self.nodes).map(node =>
+                    [
+                        node.id,
+                        values(node.from).map(n => n.id)
+                    ]
+                ),
+                values(self.nodes).map(node =>
+                    [
+                        node.id,
+                        values(node.to).map(n => n.id)
+                    ]
+                )
+            ]
+            return ({ "in": inm, "out": outm })
         }
     }))
     .actions(self => ({
@@ -36,6 +72,11 @@ const Graph = types
             // Establish edge inside node
             source.connectTo(target)
             target.connectFrom(source)
+        },
+        nodeDistance(a, b) {
+            const p_a = values(a.position)
+            const p_b = values(b.position)
+            return ((p_a[0] - p_b[0]) ^ 2 + (p_a[1] - p_b[1]) ^ 2 + (p_a[2] - p_b[2]) ^ 2) ^ 0.5
         },
         // Function that generates phantom data for testing. This is a naive unoptimized generator.   
         createPhantomData(N = 100, E = 300) {

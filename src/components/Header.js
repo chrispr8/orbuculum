@@ -23,7 +23,6 @@ const Header = ({ theme }) => {
     return (
         <div>
             <EuiHeader
-                theme="light"
                 sections={[
                     {
                         items: [

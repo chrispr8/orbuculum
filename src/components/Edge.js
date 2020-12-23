@@ -10,7 +10,7 @@ function Edge({ id }) {
     const edge = graph.edges.get(id)
 
     useEffect(() => {
-        console.log("Edge:", edge.id, edge.position)
+        // console.log("Edge:", edge.id, edge.position)
     }, [edge.id, edge.position])
 
     return (

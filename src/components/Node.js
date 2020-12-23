@@ -18,7 +18,7 @@ const Node = ({ id }) => {
     const node = graph.nodes.get(id)
 
     useEffect(() => {
-        console.log("Node: ", node.id, node.position.slice())
+        // console.log("Node: ", node.id, node.position.slice())
     }, [node.position])
 
 

@@ -23,11 +23,10 @@ if (data) {
 }
 */
 
-initialState.createPhantomData(10, 30)
+initialState.createPhantomData(100, 300)
 export const GraphStore = initialState
 
 onSnapshot(GraphStore, snapshot => {
-    console.log("Graph", snapshot)
     localStorage.setItem("graphState", JSON.stringify(snapshot))
 })
 
