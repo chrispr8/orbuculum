@@ -36,7 +36,7 @@ function Graph(props) {
 
     return (
         <Canvas
-            camera={{ position: [0, 0, 23] }}
+            camera={{ position: [0, 0, 230] }}
             className="graph"
         >
             <ambientLight />
@@ -46,7 +46,6 @@ function Graph(props) {
                 enableDamping={true}
                 dampingFactor={0.3}
             />
-            <Stars />
             <scene ref={graphRef}>
                 <GraphProvider value={graph}>
                     {values(graph.nodes).map(n => {

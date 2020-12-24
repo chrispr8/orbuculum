@@ -23,7 +23,7 @@ function Edge({ id }) {
             <lineBasicMaterial
                 attach={"material"}
                 color={0xFFFFFF}
-                linewidth={1}
+                linewidth={0.5}
                 transparent={true}
                 opacity={0.8}
             />

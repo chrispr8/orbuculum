@@ -42,13 +42,6 @@ const Header = ({ theme }) => {
                     },
                     {
                         items: [
-                            <EuiBadge
-                                color={"white"}
-                                iconType="arrowDown"
-                                iconSide="right"
-                            >
-                                Logs
-                            </EuiBadge>,
                             <EuiHeaderSectionItemButton
                                 notification={"2"}
                                 onClick={openModal}

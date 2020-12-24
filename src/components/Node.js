@@ -30,12 +30,7 @@ const Node = ({ id }) => {
             onClick={e => {
                 e.stopPropagation()
                 setActive(!active)
-                // setVisible(!visible)
-                node.movePosition([
-                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1),
-                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1),
-                    Math.random() * 10 * (Math.round(Math.random()) * 2 - 1)
-                ])
+                setVisible(!visible)
                 //console.log(node.position)
             }}
             onPointerOver={e => {
@@ -50,7 +45,7 @@ const Node = ({ id }) => {
         >
             <sphereBufferGeometry
                 attach={"geometry"}
-                args={[1, 256, 256]}
+                args={[5, 256, 256]}
             />
             <meshNormalMaterial
                 attach={"material"}
@@ -63,15 +58,17 @@ const Node = ({ id }) => {
             {
                 active ?
                     <Html
-                        scaleFactor={100}
+                        scaleFactor={500}
                         center
                         visible={true}
+                        color={"#FFFFFF"}
                     >
                         <div
                             className="content"
                             onClick={(e) => {
                                 e.stopPropagation()
                                 setActive(!active)
+                                setVisible(!visible)
                             }}
                         >
                             <CanvasCard
