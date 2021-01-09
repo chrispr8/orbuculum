@@ -1,5 +1,6 @@
 import React from "react"
 
+import "../index.css"
 import Graph from "./Graph"
 import { GraphProvider, GraphStore } from "../stores/Graph.store"
 import Header from "./Header"

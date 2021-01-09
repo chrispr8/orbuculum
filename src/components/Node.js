@@ -4,14 +4,17 @@ import { Vector3 } from "three"
 import { observer } from "mobx-react-lite"
 
 import Logo from "./Logo"
+import "../index.css"
 import { useGraph } from "../stores/Graph.store"
 import CanvasCard from "./CanvasCard"
+import { act } from "react-dom/test-utils"
 
 
 const Node = ({ id }) => {
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
     const [visible, setVisible] = useState(true)
+    const [labelView, setLabelView] = useState(false)
     const nodeRef = useRef()
 
     const graph = useGraph()
@@ -31,7 +34,6 @@ const Node = ({ id }) => {
                 e.stopPropagation()
                 setActive(!active)
                 setVisible(!visible)
-                //console.log(node.position)
             }}
             onPointerOver={e => {
                 e.stopPropagation()
@@ -55,13 +57,14 @@ const Node = ({ id }) => {
                 transparent={true}
                 opacity={0.8}
             />
+
             {
                 active ?
                     <Html
+                        className="htmlcanvascard"
                         scaleFactor={500}
                         center
                         visible={true}
-                        color={"#FFFFFF"}
                     >
                         <div
                             className="content"

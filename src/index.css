@@ -14,10 +14,28 @@ code {
     monospace;
 }
 
+root {
+    height: 100%;
+    width: 100%;
+}
+
 canvas {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vh;
+    height: 100%;
+    width: 100%;
     background-color: #000000;
+    position: relative;
+}
+
+.content {
+    background-color: transparent;
+    color: red;
+    padding: 5px;
+}
+
+.euiCard {
+    background: #FFF;
+    backdrop-filter: blur(5px);
+    opacity: 0.8;
 }
