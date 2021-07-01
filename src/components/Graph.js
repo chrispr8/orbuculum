@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, Stats, Stars } from "@react-three/drei"
 import { values } from "mobx"
@@ -9,11 +9,21 @@ import Edge from "./Edge"
 import Node from "./Node"
 import { GraphProvider, useGraph } from "../stores/Graph.store"
 import { forceLayoutSimulation } from "../utils/ngraph"
+import { useConfig } from "../stores/Config.store"
 
 
 function Graph(props) {
     const graphRef = useRef(null)
     const graph = useGraph()
+    const config = useConfig()
+
+    const physics = {
+        gravity: config.getGravity
+    }
+    
+    useEffect(() => {
+        console.log(physics)
+    })
 
 
     for (const pos of forceLayoutSimulation(values(graph.nodes).map(n => n.id),

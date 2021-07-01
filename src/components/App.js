@@ -1,8 +1,9 @@
 import "../index.css"
-import Body from "./Body"
 import { ConfigProvider, ConfigStore, useConfig } from "../stores/Config.store"
 import { GraphProvider, GraphStore } from "../stores/Graph.store"
+import Graph from "./Graph"
 import Header from "./Header"
+import Panel from "./Panel"
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <ConfigProvider value={ConfigStore}>
         <GraphProvider value={GraphStore}>
           <Header position="absolute" />
-          <Body />
+          <Panel />
+          <Graph />
         </GraphProvider>
       </ConfigProvider>
     </div>
