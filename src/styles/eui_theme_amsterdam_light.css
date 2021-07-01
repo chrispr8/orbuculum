@@ -1868,6 +1868,7 @@ html {
     /* 3 */ }
 
 .euiCard {
+  z-index: 1000;
   -webkit-flex-grow: 1;
           flex-grow: 1; }
   .euiCard.euiCard--flexGrowZero {
@@ -6564,13 +6565,13 @@ html {
 .euiFlyout {
   border-left: none;
   box-shadow: 0 2.7px 9px rgba(0, 0, 0, 0.13), 0 9.4px 24px rgba(0, 0, 0, 0.09), 0 21.8px 43px rgba(0, 0, 0, 0.08);
-  position: fixed;
+  position: relative;
   top: 0;
   bottom: 0;
   right: 0;
   height: 100%;
   z-index: 3000;
-  background: #FFF;
+  background: red;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;

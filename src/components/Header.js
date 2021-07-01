@@ -1,19 +1,18 @@
 import { useState } from "react"
 import {
     EuiAvatar,
-    EuiBadge,
     EuiHeader,
-    EuiHeaderLogo,
     EuiHeaderLinks,
     EuiHeaderLink,
     EuiHeaderSectionItemButton,
-    EuiIcon
+    EuiSpacer
 } from "@elastic/eui"
 
 import Login from "./Login"
+import HeaderLogo from "./HeaderLogo"
 
 
-const Header = ({ theme }) => {
+const Header = () => {
     const [showModal, setShowModal] = useState(false)
 
     const openModal = () => setShowModal(true)
@@ -23,19 +22,20 @@ const Header = ({ theme }) => {
     return (
         <div>
             <EuiHeader
+                position="static"
+                style={{ zIndex: 3600 }}
                 sections={[
                     {
                         items: [
-                            <EuiHeaderLogo>Orbuculum</EuiHeaderLogo>,
+                            <HeaderLogo />,
+                            <EuiSpacer size="l" />,
                             <EuiHeaderLinks>
-                                <EuiHeaderLink isActive>
-                                    <EuiIcon type="dashboardApp" size="l" />
-                                    Dashboard
-                            </EuiHeaderLink>
                                 <EuiHeaderLink>
-                                    <EuiIcon type="graphApp" size="l" />
+                                    Dashboard
+                                </EuiHeaderLink>
+                                <EuiHeaderLink>
                                     Graph
-                            </EuiHeaderLink>
+                                </EuiHeaderLink>
                             </EuiHeaderLinks>,
                         ],
                         borders: "right",

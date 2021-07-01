@@ -10,7 +10,7 @@ let initialState = Graph.create({
 })
 
 
-/*
+/* TODO: implement localStorage/offline first
 const data = localStorage.getItem("graphState")
 
 if (data) {
@@ -40,7 +40,7 @@ export function useGraph() {
         throw new Error("Your GraphStore is invalid")
     }
     if (store === undefined) {
-        throw new Error("Store is undefined!")
+        throw new Error("GraphStore is undefined!")
     }
     return store
 }

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Html } from "drei"
+import { Html } from "@react-three/drei"
 import { Vector3 } from "three"
 import { observer } from "mobx-react-lite"
 
@@ -68,7 +68,7 @@ const Node = ({ id }) => {
                     >
                         <div
                             className="content"
-                            onClick={(e) => {
+                            onDoubleClick={(e) => {
                                 e.stopPropagation()
                                 setActive(!active)
                                 setVisible(!visible)

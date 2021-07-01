@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg"
 
 const Logo = (props) => {
     return (
-        <div className={"Logo"} style={{ height: props.height }}>
+        <div className={"logo"} >
             <img src={logo} alt="" />
         </div>
     )

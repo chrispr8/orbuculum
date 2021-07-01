@@ -1,9 +1,9 @@
 import React, { useRef } from "react"
-import { Canvas } from "react-three-fiber"
-import { OrbitControls, Stats, Stars } from "drei"
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls, Stats, Stars } from "@react-three/drei"
 import { values } from "mobx"
 import { observer } from "mobx-react-lite"
-import { useWorker, WORKER_STATUS } from "@koale/useworker"
+//import { useWorker, WORKER_STATUS } from "@koale/useworker"
 
 import Edge from "./Edge"
 import Node from "./Node"
