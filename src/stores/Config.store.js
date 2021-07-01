@@ -13,12 +13,11 @@ export const ConfigProvider = ConfigContext.Provider
 
 export function useConfig() {
     const store = useContext(ConfigContext);
-    console.log(ConfigContext)
-    /*if (store === null) {
+    if (store === null) {
         throw new Error("ConfigStore malfunctioned!")
     }
     if (store === undefined) {
         throw new Error("ConfigStore is undefined!")
-    }*/
+    }
     return store
 }
